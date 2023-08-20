@@ -18,6 +18,7 @@ void mostrarFilmes();
 Filme cadastrarFilme();
 void exibirFilme(int i);
 int buscarFilme(char *nome);
+int buscarDiretor(char *diretor);
 
 Filme filmes[MAX_FILMES];
 int totalFilmes = 0;
@@ -25,8 +26,9 @@ int totalFilmes = 0;
 int main()
 {
 
-    int opcao, index;
+    int opcao;
     char nomeFilme[MAX_STRING];
+    char nomeDiretor[MAX_STRING];
 
     do
     {
@@ -34,7 +36,8 @@ int main()
         printf("1. Cadastrar Filme\n");
         printf("2. Ver Filmes Cadastrados\n");
         printf("3. Buscar Filme Por Nome\n");
-        printf("4. Sair\n");
+        printf("4. Buscar Filme Por Diretor\n");
+        printf("5. Sair\n");
         scanf("%d", &opcao);
 
         switch (opcao)
@@ -62,21 +65,23 @@ int main()
                 fgets(nomeFilme, MAX_STRING, stdin);
                 nomeFilme[strcspn(nomeFilme, "\n")] = '\0';
 
-                index = buscarFilme(nomeFilme);
-                if (index != -1) {
-                    exibirFilme(index);
-                } 
-                else 
-                {
-                    printf("Filme não encontrado!\n");
-                }
+                buscarFilme(nomeFilme);
+                break;
+        
+        case 4:
+            printf("Informe o nome do diretor: ");
+                getchar(); 
+                fgets(nomeDiretor, MAX_STRING, stdin);
+                nomeDiretor[strcspn(nomeDiretor, "\n")] = '\0';
+
+                buscarDiretor(nomeDiretor);
                 break;
 
         default:
             printf("\nOpção inválida!\n");
         }
 
-    } while (opcao != 4);
+    } while (opcao != 5);
 
     return 0;
 }
@@ -136,12 +141,37 @@ void mostrarFilmes()
 
 int buscarFilme(char *nome)
 {
+    int match = 0;
     for (int i = 0; i < totalFilmes; i++) 
         {
             if (strcmp(filmes[i].titulo, nome) == 0) 
             {
-                return i;
+                exibirFilme(i);
+                match++;
             }
         }
-        return -1; 
+        if (match == 0)
+        {
+            printf ("Filme Nao Encontrado!");
+        }
+}
+
+int buscarDiretor(char *diretor)
+{
+    int match = 0;
+    printf ("Fimes por %s:\n", diretor);
+
+    for (int i = 0; i < totalFilmes; i++) 
+        {
+            if (strcmp(filmes[i].diretor, diretor) == 0) 
+            {
+                exibirFilme(i);
+                match++;
+            }
+        }
+
+        if (match == 0)
+        {
+            printf ("Diretor Nao Encontrado!");
+        }
 }
