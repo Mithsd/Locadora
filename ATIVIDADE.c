@@ -4,6 +4,9 @@
 #define MAX_STRING 100
 #define MAX_FILMES 5
 
+
+
+
 typedef struct
 {
     char titulo[MAX_STRING];
@@ -14,14 +17,21 @@ typedef struct
 
 } Filme;
 
-void mostrarFilmes();
+
+
+
 Filme cadastrarFilme();
+void mostrarFilmes();
 void exibirFilme(int i);
-int buscarFilme(char *nome);
-int buscarDiretor(char *diretor);
+void buscarFilme(char *nome);
+void buscarDiretor(char *diretor);
+
+
+
 
 Filme filmes[MAX_FILMES];
 int totalFilmes = 0;
+
 
 int main()
 {
@@ -43,7 +53,6 @@ int main()
         switch (opcao)
         {
         case 1:
-
             if (totalFilmes < MAX_FILMES)
             {
                 filmes[totalFilmes] = cadastrarFilme();
@@ -55,9 +64,11 @@ int main()
             }
             break;
 
+
         case 2:
             mostrarFilmes();
             break;
+
 
         case 3:
             printf("Informe o nome do filme: ");
@@ -68,6 +79,7 @@ int main()
                 buscarFilme(nomeFilme);
                 break;
         
+
         case 4:
             printf("Informe o nome do diretor: ");
                 getchar(); 
@@ -77,6 +89,11 @@ int main()
                 buscarDiretor(nomeDiretor);
                 break;
 
+
+
+        case 5:
+        return 0;
+
         default:
             printf("\nOpção inválida!\n");
         }
@@ -85,6 +102,10 @@ int main()
 
     return 0;
 }
+
+
+
+
 
 Filme cadastrarFilme()
 {
@@ -139,7 +160,7 @@ void mostrarFilmes()
     }
 }
 
-int buscarFilme(char *nome)
+void buscarFilme(char *nome)
 {
     int match = 0;
     for (int i = 0; i < totalFilmes; i++) 
@@ -156,7 +177,7 @@ int buscarFilme(char *nome)
         }
 }
 
-int buscarDiretor(char *diretor)
+void buscarDiretor(char *diretor)
 {
     int match = 0;
     printf ("Fimes por %s:\n", diretor);
