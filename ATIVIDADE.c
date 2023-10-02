@@ -174,7 +174,6 @@ void exibirFilme(int i)
     printf("Ano de Lançamento: %d\n", f.anoLancamento);
     printf("Classificação: %.1f\n", f.classificacao);
     printf("Quantidade em estoque: %d\n", f.quantidade);
-    printf("INDEX %d\n", i);
 }
 
 void mostrarFilmes()
@@ -270,8 +269,6 @@ void alugarFilme (char *nome)
 
 void devoluçãoFilme (char *nome)
 {
-    int i;
-    Filme f = filmes[i];
     for (int i = 0; i < totalFilmes; i++) 
     {
         if (strcmp(filmes[i].titulo, nome) == 0) 
